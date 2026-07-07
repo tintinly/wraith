@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-content mx-auto py-16">
+  <div>
     <header>
       <AppHeader />
     </header>

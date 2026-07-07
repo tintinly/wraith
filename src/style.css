@@ -4,20 +4,24 @@
 /* 默认前缀为 icon */
 @plugin "@iconify/tailwind4" {
  prefix: "icon"; 
- scale: 1.3;
+ scale: 1.5;
 }
 
 /* 暗色模式 */
 .darkTheme {
-  --color-background: #171717;
-  --color-foreground: #ffffff;
+  --color-background: #0A0A0A;
+  --color-background-secondary: #252525;
+  --color-foreground: #FAFAFA;
+  --color-foreground-secondary: #999999;
   --color-border: #313131;
 }
 
 @theme {
-  --color-background: #ffffff;
+  --color-background: #FAFAFA;
+  --color-background-secondary: #f1f1f1;
   --color-foreground: #171717;
-  --color-border: #e2e2e2;
+  --color-foreground-secondary: #626262;
+  --color-border: #e8e8e8;
 
   --max-width-content: 720px;
 }
@@ -27,11 +31,11 @@
 
 /* ========== 基础样式 ========== */
 html {
-  scrollbar-gutter: stable; /* 始终预留滚动条空间，避免页面切换时因有无滚动条导致的 x 轴偏移 */
-  scroll-behavior: smooth; /* 平滑滚动 */
+  /* scrollbar-gutter: stable; 始终预留滚动条空间，避免页面切换时因有无滚动条导致的 x 轴偏移 */
+  /* scroll-behavior: smooth; 平滑滚动 */
 }
 
-/* body {
+body {
   background-color: var(--color-background);
   color: var(--color-foreground);
-} */
+}
