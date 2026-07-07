@@ -10,10 +10,11 @@
 /* 暗色模式 */
 .darkTheme {
   --color-background: #0A0A0A;
-  --color-background-secondary: #252525;
+  --color-background-secondary: #1b1b1b;
   --color-foreground: #FAFAFA;
   --color-foreground-secondary: #999999;
   --color-border: #313131;
+  --color-outline: #313131;
 }
 
 @theme {
@@ -21,7 +22,8 @@
   --color-background-secondary: #f1f1f1;
   --color-foreground: #171717;
   --color-foreground-secondary: #626262;
-  --color-border: #e8e8e8;
+  --color-border: #dadada;
+  --color-outline: #dadada;
 
   --max-width-content: 720px;
 }
@@ -33,6 +35,11 @@
 html {
   /* scrollbar-gutter: stable; 始终预留滚动条空间，避免页面切换时因有无滚动条导致的 x 轴偏移 */
   /* scroll-behavior: smooth; 平滑滚动 */
+}
+
+/* 主题切换过渡 — 仅过渡背景与边框，文字颜色即时切换避免闪烁 */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, outline-color 0.3s ease;
 }
 
 body {
