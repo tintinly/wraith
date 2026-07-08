@@ -5,6 +5,9 @@ import path from 'path' // 注意：需要安装 @types/node 才能用 path
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    host: '0.0.0.0',
+  },
   plugins: [
     vue(), 
     tailwindcss()

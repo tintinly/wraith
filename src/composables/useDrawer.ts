@@ -1,10 +1,10 @@
 import { ref, readonly } from 'vue'
 
-export type TabId = 'about' | 'projects' | 'contact'
+export type TabId = 'websites' | 'stacks' | 'projects'
 
 // 模块级状态（单例，所有调用者共享）
 const isOpen = ref(false)
-const currentTab = ref<TabId>('about')
+const currentTab = ref<TabId>('websites')
 let wheelCleanup: (() => void) | null = null
 
 export function useDrawer() {
@@ -39,9 +39,9 @@ export function useDrawer() {
       if (isOpen.value) {
         // 面板打开时：下滑关闭（面板内容区内的滚动除外）
         if (event.deltaY > 0) {
-          const target = event.target as HTMLElement
-          const isInContent = target.closest('[data-drawer-content]')
-          if (isInContent) return // 面板内容区自然滚动
+          // const target = event.target as HTMLElement
+          // const isInContent = target.closest('[data-drawer-content]')
+          // if (isInContent) return // 面板内容区自然滚动
           close()
           event.preventDefault()
         }

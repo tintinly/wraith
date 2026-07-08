@@ -24,13 +24,13 @@ const { show } = useToast()
 const toggleTheme = (pref: 'dark' | 'light' | 'system') => {
     if (pref === 'system') {
         toggle('light')
-        show('切换为 亮色 模式')
+        // show('切换为 亮色 模式')
     } else if (pref === 'light') {
         toggle('dark')
-        show('切换为 暗色 模式')
+        // show('切换为 暗色 模式')
     } else if (pref === 'dark') {
         toggle('system')
-        show('切换为 跟随系统 模式')
+        // show('切换为 跟随系统 模式')
     }
 }
 
