@@ -60,7 +60,7 @@ watchEffect(() => {
 export function useTheme() {
   function toggle(pref: 'dark' | 'light' | 'system') {
     if (pref === 'system') {
-      theme.value = getInitialTheme()
+      theme.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
       themePreference.value = 'system'
     } else {
       theme.value = pref
