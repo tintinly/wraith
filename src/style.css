@@ -9,25 +9,25 @@
 
 /* 暗色模式 */
 .darkTheme {
-  --color-background: #0A0A0A;
-  --color-background-secondary: #1b1b1b;
+  --color-background: #1e1e1e;
+  --color-background-secondary: #363636;
   --color-foreground: #FAFAFA;
   --color-foreground-secondary: #999999;
-  --color-border: #313131;
-  --color-border-secondary: #525252;
+  --color-border: #363636;
+  --color-border-secondary: #7a7a7a;
   --color-outline: #313131;
 }
 
 @theme {
-  --color-background: #FAFAFA;
-  --color-background-secondary: #f1f1f1;
+  --color-background: #F1F1F1;
+  --color-background-secondary: #dadada;
   --color-foreground: #171717;
   --color-foreground-secondary: #626262;
-  --color-border: #dadada;
+  --color-border: #c7c7c7;
   --color-border-secondary: #727272;
-  --color-outline: #dadada;
+  --color-outline: #c7c7c7;
 
-  --max-width-content: 720px;
+  --max-width-content: 1100px;
 }
 
 
@@ -40,16 +40,25 @@ html {
 }
 
 body {
-  /* background-color: var(--color-background); */
-  color: var(--color-foreground);
+  /* 呈现单页应用
+  固定宽高为视口大小
+  隐藏溢出的所有内容避免出现滚动条
+  禁止页面拖动*/
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  touch-action: none;
 
+  color: var(--color-foreground);
   background-color: var(--color-background);
+
+  /* 渐变背景 */
   background: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 
 }
 
 .darkTheme body {
-  background-color: var(--color-background);  /* fallback for old browsers */
+  /* 暗色的渐变背景 */
   background: 
       linear-gradient(to bottom, #141414 0%, #232323 40%, #101010 150%),
       linear-gradient(to top, rgba(0, 0, 0, 0.1) 0%, rgba(0,0,0,0.25) 200%);

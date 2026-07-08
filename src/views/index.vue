@@ -23,5 +23,35 @@
         <span class="icon-[fa7-brands--youtube] group-hover:scale-110 transition-all duration-300"></span>
       </a>
     </nav>
+    <div v-if="!isOpen">
+      <span class="absolute bottom-8 left-1/2 -translate-x-1/2 icon-[fa7-solid--angle-up] text-xl text-foreground-secondary arrow-move"></span>
+      <span class="absolute bottom-8 left-1/2 -translate-x-1/2 icon-[fa7-solid--angle-up] text-xl text-foreground-secondary arrow2-move"></span>
+      <span class="absolute bottom-4 left-1/2 -translate-x-1/2 text-foreground-secondary text-sm animate-pulse">Wheel Up</span>
+    </div>
   </div>
 </template>
+<script setup lang="ts">
+import { useDrawer } from '@/composables/useDrawer'
+
+const { isOpen } = useDrawer()
+</script>
+<style scoped>
+  .arrow-move {
+    animation: arrow-movement 2s ease-in-out infinite;
+  }
+  .arrow2-move {
+    animation: arrow-movement 2s 1s ease-in-out infinite backwards;
+  }
+  @keyframes arrow-movement {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      bottom: 50px;
+    }
+  }
+</style>
