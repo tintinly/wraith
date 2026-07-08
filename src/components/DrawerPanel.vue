@@ -17,9 +17,13 @@
         bottom-1 w-[calc(100%-8px)] sm:bottom-10 sm:w-[calc(100%-80px)] md:bottom-20 md:w-[calc(100%-160px)]"
         @click.stop
       >
+        <div v-if="isMobile" class="mx-auto my-1  h-1.5 w-[15%] rounded-full bg-foreground-secondary/30"></div>
+        
         <!-- 头部：Tab + 关闭 -->
-        <div class="flex shrink-0 items-center justify-between px-4 py-3">
-          <div ref="tabContainer" class="relative flex gap-4">
+        <div class="flex shrink-0 items-center px-4 py-3"
+          :class="isMobile ? 'justify-center' : 'justify-between'">
+          <div ref="tabContainer" class="relative w-full flex gap-4 "
+            :class="isMobile ? 'justify-around' : 'justify-start'">
             <button
               v-for="tab in tabs"
               :key="tab.id"
@@ -39,7 +43,7 @@
             />
           </div>
 
-          <button
+          <button v-if="!isMobile" 
             class="inline-flex cursor-pointer rounded-full p-1.5 text-foreground-secondary transition-colors duration-200 hover:bg-background-secondary hover:text-foreground active:bg-background-secondary active:text-foreground"
             title="关闭"
             @click="close"
@@ -49,7 +53,7 @@
         </div>
 
         <!-- 内容区：横向滑动切换 -->
-        <div class="flex-1 overflow-x-auto snap-x snap-mandatory scrollbar-none" data-drawer-content>
+        <div ref="scrollContainer" class="flex-1 overflow-x-auto snap-x snap-mandatory scrollbar-none" data-drawer-content flex h-full @scrollend="onContentScrollEnd">
           <div class="flex h-full">
             <div v-for="tab in tabs" :key="tab.id" :ref="(el) => panelRefs[tab.id] = el as HTMLElement"
                  class="w-full shrink-0 snap-start overflow-y-auto p-6">
@@ -67,11 +71,14 @@
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useDrawer, type TabId } from '@/composables/useDrawer'
+import { useDevice } from '@/composables/useDevice'
 import DrawerTabStacks from '@/components/DrawerTabStacks.vue'
 import DrawerTabProjects from '@/components/DrawerTabProjects.vue'
 import DrawerTabWebsites from '@/components/DrawerTabWebsites.vue'
 
-const { isOpen, currentTab, close, switchTab: setTab, initWheelListener, destroyWheelListener } = useDrawer()
+const { isMobile } = useDevice()
+
+const { isOpen, currentTab, close, switchTab, initWheelListener, destroyWheelListener } = useDrawer()
 
 const tabs: { id: TabId; label: string }[] = [
   { id: 'websites', label: 'Websites' },
@@ -92,6 +99,7 @@ const tabRefs = reactive<Record<TabId, HTMLElement | null>>({
 })
 
 const tabContainer = ref<HTMLElement | null>(null)
+const scrollContainer = ref<HTMLElement | null>(null)
 
 // 指示器位置样式
 const indicatorStyle = reactive({ left: '0px', width: '0px' })
@@ -106,16 +114,22 @@ function updateIndicator() {
   indicatorStyle.width = `${tabRect.width}px`
 }
 
-// 点击 Tab 时滚动到对应面板
-function switchTab(tab: TabId) {
-  setTab(tab)
-  panelRefs[tab]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+// 横滑内容区时同步更新 currentTab
+function onContentScrollEnd() {
+  const el = scrollContainer.value
+  if (!el) return
+  const index = Math.round(el.scrollLeft / el.clientWidth)
+  const tabId = tabs[index]?.id
+  if (tabId) switchTab(tabId)
 }
 
-// currentTab 变化时更新指示器位置
-watch(currentTab, () => nextTick(updateIndicator))
+// currentTab 变化时更新指示器位置，滚动到对应面板
+watch(currentTab, () => {
+  updateIndicator()
+  panelRefs[currentTab.value]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+})
 
-// 面板打开后更新指示器（此时按钮 DOM 才渲染出来）
+// 面板打开后更新指示器（在按钮 DOM 渲染之后）
 watch(isOpen, (open) => {
   if (open) nextTick(updateIndicator)
 })
@@ -124,7 +138,9 @@ onMounted(() => {
   initWheelListener()
   nextTick(updateIndicator)
 })
-onUnmounted(destroyWheelListener)
+onUnmounted(() => {
+  destroyWheelListener()
+})
 </script>
 
 <style scoped>

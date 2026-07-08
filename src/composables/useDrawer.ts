@@ -31,32 +31,72 @@ export function useDrawer() {
     currentTab.value = tab
   }
 
-  // ---- 滚轮事件 ----
+  // ---- 滚轮 + 触摸事件（PC + 移动端） ----
   function initWheelListener() {
-    if (wheelCleanup) return // 防止重复注册
+    if (wheelCleanup) return
 
-    const handler = (event: WheelEvent) => {
+    // PC：滚轮事件
+    const wheelHandler = (event: WheelEvent) => {
       if (isOpen.value) {
         // 面板打开时：下滑关闭（面板内容区内的滚动除外）
         if (event.deltaY > 0) {
-          // const target = event.target as HTMLElement
-          // const isInContent = target.closest('[data-drawer-content]')
-          // if (isInContent) return // 面板内容区自然滚动
+          const target = event.target as HTMLElement
+          const isInContent = target.closest('[data-drawer-content]')
+          if (isInContent) return // 面板内容区自然滚动
           close()
           event.preventDefault()
         }
         return
       }
 
-      // 面板关闭时：仅在页面顶部 + 上滑时触发打开
       if (window.scrollY <= 0 && event.deltaY < 0) {
         open()
         event.preventDefault()
       }
     }
 
-    window.addEventListener('wheel', handler, { passive: false })
-    wheelCleanup = () => window.removeEventListener('wheel', handler)
+    // 移动端：触摸手势
+    let touchStartY = 0
+    const SWIPE_THRESHOLD = 30 // 最小滑动距离（px）
+
+    const touchStartHandler = (event: TouchEvent) => {
+      if (event.touches.length === 1) {
+        touchStartY = event.touches[0].clientY
+      }
+    }
+
+    const touchMoveHandler = (event: TouchEvent) => {
+      if (event.touches.length !== 1) return
+      const deltaY = event.touches[0].clientY - touchStartY
+
+      if (isOpen.value) {
+        // 面板打开时：下滑关闭
+        if (deltaY > SWIPE_THRESHOLD) {
+          const target = event.target as HTMLElement
+          const isInContent = target.closest('[data-drawer-content]')
+          if (isInContent) return // 面板内容区自然滚动
+          close()
+          touchStartY = event.touches[0].clientY // 重置，防止重复触发
+        }
+        return
+      }
+
+      // 面板关闭时：上滑打开
+      if (deltaY < -SWIPE_THRESHOLD) {
+        open()
+        touchStartY = event.touches[0].clientY
+      }
+    }
+
+    window.addEventListener('wheel', wheelHandler, { passive: false })
+    window.addEventListener('touchstart', touchStartHandler, { passive: true })
+    window.addEventListener('touchmove', touchMoveHandler, { passive: true })
+
+    wheelCleanup = () => {
+      window.removeEventListener('wheel', wheelHandler)
+      window.removeEventListener('touchstart', touchStartHandler)
+      window.removeEventListener('touchmove', touchMoveHandler)
+    }
   }
 
   function destroyWheelListener() {
