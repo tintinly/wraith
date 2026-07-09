@@ -53,10 +53,10 @@
         </div>
 
         <!-- 内容区：横向滑动切换 -->
-        <div ref="scrollContainer" class="flex-1 overflow-x-auto snap-x snap-mandatory scrollbar-none" data-drawer-content flex h-full @scrollend="onContentScrollEnd">
+        <div ref="scrollContainer" class="flex-1 overflow-x-auto snap-x snap-mandatory scrollbar-none" data-drawer-content @scrollend="onContentScrollEnd">
           <div class="flex h-full">
             <div v-for="tab in tabs" :key="tab.id" :ref="(el) => panelRefs[tab.id] = el as HTMLElement"
-                 class="w-full shrink-0 snap-start overflow-y-auto p-3 md:p-6 ">
+                 class="w-full shrink-0 snap-start overflow-y-auto p-2 md:p-4 ">
               <DrawerTabStacks v-if="tab.id === 'stacks'" />
               <DrawerTabProjects v-else-if="tab.id === 'projects'" />
               <DrawerTabWebsites v-else-if="tab.id === 'websites'" />
