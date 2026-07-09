@@ -13,7 +13,7 @@
     <Transition name="drawer-panel">
       <div
         v-if="isOpen"
-        class="absolute left-1/2 translate-x-[-50%] h-[70vh] max-h-250 max-w-content flex flex-col rounded-xl border border-border bg-background shadow-2xl z-50
+        class="absolute left-1/2 translate-x-[-50%] h-[65vh] max-h-250 max-w-content flex flex-col rounded-xl border border-border bg-background shadow-2xl z-50
         bottom-1 w-[calc(100%-8px)] sm:bottom-10 sm:w-[calc(100%-80px)] md:bottom-20 md:w-[calc(100%-160px)]"
         @click.stop
       >
@@ -56,7 +56,7 @@
         <div ref="scrollContainer" class="flex-1 overflow-x-auto snap-x snap-mandatory scrollbar-none" data-drawer-content flex h-full @scrollend="onContentScrollEnd">
           <div class="flex h-full">
             <div v-for="tab in tabs" :key="tab.id" :ref="(el) => panelRefs[tab.id] = el as HTMLElement"
-                 class="w-full shrink-0 snap-start overflow-y-auto p-6">
+                 class="w-full shrink-0 snap-start overflow-y-auto p-3 md:p-6 ">
               <DrawerTabStacks v-if="tab.id === 'stacks'" />
               <DrawerTabProjects v-else-if="tab.id === 'projects'" />
               <DrawerTabWebsites v-else-if="tab.id === 'websites'" />
@@ -123,15 +123,29 @@ function onContentScrollEnd() {
   if (tabId) switchTab(tabId)
 }
 
+// 滚动到指定 Tab 面板（仅容器内滚动，不影响页面）
+function scrollToTab(behavior: ScrollBehavior = 'smooth') {
+  const el = scrollContainer.value
+  if (!el) return
+  const index = tabs.findIndex(t => t.id === currentTab.value)
+  if (index === -1) return
+  el.scrollTo({ left: index * el.clientWidth, behavior })
+}
+
 // currentTab 变化时更新指示器位置，滚动到对应面板
 watch(currentTab, () => {
   updateIndicator()
-  panelRefs[currentTab.value]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+  scrollToTab()
 })
 
-// 面板打开后更新指示器（在按钮 DOM 渲染之后）
+// 面板打开后更新指示器 + 恢复滚动位置（此时按钮和容器 DOM 才渲染）
 watch(isOpen, (open) => {
-  if (open) nextTick(updateIndicator)
+  if (open) {
+    nextTick(() => {
+      updateIndicator()
+      scrollToTab('instant')
+    })
+  }
 })
 
 onMounted(() => {

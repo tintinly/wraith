@@ -12,13 +12,11 @@ export function useDrawer() {
   function open() {
     if (isOpen.value) return
     isOpen.value = true
-    document.body.style.overflow = 'hidden' // 阻止背景页面滚动
   }
 
   function close() {
     if (!isOpen.value) return
     isOpen.value = false
-    document.body.style.overflow = '' // 恢复背景页面滚动
   }
 
   function toggle() {

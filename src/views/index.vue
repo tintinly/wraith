@@ -24,19 +24,19 @@
     </nav>
     <nav class="mt-5 flex items-center justify-center gap-4">
       <a href="https://github.com/tintinly" target="_blank" rel="noopener noreferrer" 
-      class="group rounded-full bg-background text-foreground-secondary inline-flex hover:text-foreground hover:-translate-y-1 active:text-foreground transition-all duration-300">
+      class="group rounded-full text-foreground-secondary inline-flex hover:text-foreground hover:-translate-y-1 active:text-foreground transition-all duration-300">
         <span class="icon-[fa7-brands--github] group-hover:scale-110 transition-all duration-300"></span>
       </a>
       <a href="https://space.bilibili.com/406137704" target="_blank" rel="noopener noreferrer" 
-      class="group rounded-full bg-background text-foreground-secondary inline-flex hover:text-[#FB7299] hover:-translate-y-0.5 active:text-[#FB7299] transition-all duration-300">
+      class="group rounded-full text-foreground-secondary inline-flex hover:text-[#FB7299] hover:-translate-y-0.5 active:text-[#FB7299] transition-all duration-300">
         <span class="icon-[fa7-brands--bilibili] group-hover:scale-110 transition-all duration-300"></span>
       </a>
       <a href="https://twitter.com/TintinMrLiu" target="_blank" rel="noopener noreferrer" 
-      class="group rounded-full bg-background text-foreground-secondary inline-flex hover:text-foreground hover:-translate-y-0.5 active:text-foreground transition-all duration-300">
+      class="group rounded-full text-foreground-secondary inline-flex hover:text-foreground hover:-translate-y-0.5 active:text-foreground transition-all duration-300">
         <span class="icon-[fa7-brands--x-twitter] group-hover:scale-110 transition-all duration-300"></span>
       </a>
       <a href="https://www.youtube.com/@丁丁-i2b" target="_blank" rel="noopener noreferrer" 
-      class="group rounded-full bg-background text-foreground-secondary inline-flex hover:text-[#FF0033] hover:-translate-y-0.5 active:text-[#FF0033] transition-all duration-300">
+      class="group rounded-full text-foreground-secondary inline-flex hover:text-[#FF0033] hover:-translate-y-0.5 active:text-[#FF0033] transition-all duration-300">
         <span class="icon-[fa7-brands--youtube] group-hover:scale-110 transition-all duration-300"></span>
       </a>
     </nav>

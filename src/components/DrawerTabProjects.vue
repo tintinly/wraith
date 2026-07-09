@@ -1,6 +1,15 @@
 <template>
-  <div class="space-y-4 text-foreground-secondary">
-    <h2 class="text-lg font-semibold text-foreground">项目</h2>
-    <p class="leading-relaxed">这里将展示项目作品列表</p>
+  <div class="space-y-2 p-2">
+    <h2 class="text-lg font-semibold text-foreground">My personal projects</h2>
+    <p class="leading-relaxed text-foreground-secondary">Here are some of my personal projects.</p>
+  </div>
+  <div class="mt-4 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
+    <ProjectCard v-for="project in projects" :key="project.projectName" :projectName="project.projectName" :projectDescription="project.projectDescription" :projectLink="project.projectLink" :projectIcon="project.projectIcon" />
   </div>
 </template>
+<script setup lang="ts">
+import ProjectCard from './ProjectCard.vue'
+import { projects } from '@/data/projects'
+</script>
+<style scoped>
+</style>
