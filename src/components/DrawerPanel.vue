@@ -1,19 +1,19 @@
 <template>
   <Teleport to="body">
     <!-- 遮罩层 -->
-    <Transition name="drawer-overlay">
+    <!-- <Transition name="drawer-overlay">
       <div
         v-if="isOpen"
         class="absolute inset-0 z-40 backdrop-blur-[2px]"
         @click="close"
       />
-    </Transition>
+    </Transition> -->
 
     <!-- 面板 -->
     <Transition name="drawer-panel">
       <div
         v-if="isOpen"
-        class="absolute left-1/2 translate-x-[-50%] h-[65vh] max-h-250 max-w-content flex flex-col rounded-xl border border-border bg-background shadow-2xl z-50
+        class="absolute left-1/2 translate-x-[-50%] h-[65vh] max-h-250 max-w-content flex flex-col rounded-xl border border-border backdrop-blur-2xl  shadow-2xl z-50
         bottom-1 w-[calc(100%-8px)] sm:bottom-10 sm:w-[calc(100%-80px)] md:bottom-20 md:w-[calc(100%-160px)]"
         @click.stop
       >

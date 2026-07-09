@@ -1,6 +1,5 @@
 <template>
   <div class="space-y-2 p-2">
-    <h2 class="text-lg font-semibold text-foreground">My personal projects</h2>
     <p class="leading-relaxed text-foreground-secondary">Here are some of my personal projects.</p>
   </div>
   <div class="mt-4 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
