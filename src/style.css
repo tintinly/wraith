@@ -22,7 +22,7 @@
 @theme {
   --color-surface: #ffffff;
   --color-background: #fAfAfA;
-  --color-background-secondary: #dadada;
+  --color-background-secondary: #e8e8e8;
   --color-foreground: #171717;
   --color-foreground-secondary: #626262;
   --color-border: #d1d1d1;
@@ -65,4 +65,23 @@ body {
       linear-gradient(to bottom, #141414 0%, #232323 40%, #101010 150%),
       linear-gradient(to top, rgba(0, 0, 0, 0.1) 0%, rgba(0,0,0,0.25) 200%);
   background-blend-mode: multiply;
+}
+
+
+/* 自定义 title 样式 */
+a[data-title] {
+  position: relative;
+}
+a[data-title]:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-foreground-secondary);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: var(--text-xs);
 }

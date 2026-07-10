@@ -13,7 +13,7 @@
     <Transition name="drawer-panel">
       <div
         v-if="isOpen"
-        class="absolute left-1/2 translate-x-[-50%] h-[65vh] max-h-250 max-w-content flex flex-col rounded-xl border border-border backdrop-blur-2xl  shadow-2xl z-50
+        class="absolute left-1/2 translate-x-[-50%] h-[65vh] max-h-250 max-w-content flex flex-col rounded-xl border border-border backdrop-blur-2xl  shadow-2xl shadow-border z-50
         bottom-1 w-[calc(100%-8px)] sm:bottom-10 sm:w-[calc(100%-80px)] md:bottom-20 md:w-[calc(100%-160px)]"
         @click.stop
       >
