@@ -1,5 +1,6 @@
-import { computed, ref, watchEffect } from 'vue'
-
+import { computed, nextTick, ref, watchEffect } from 'vue'
+import { useToast } from '@/composables/useToast'
+const { show } = useToast()
 const THEME_PREFERENCE_KEY = 'theme-preference'
 
 // 从 localStorage 读取偏好，若无则跟随系统
@@ -57,19 +58,68 @@ watchEffect(() => {
   localStorage.setItem(THEME_PREFERENCE_KEY, themePreference.value)
 })
 
+// 检查浏览器是否支持 View Transitions API 且用户未偏好减少动画
+const enableTransitions = () =>
+  'startViewTransition' in document &&
+  window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+
 export function useTheme() {
-  function toggle(pref: 'dark' | 'light' | 'system') {
-    if (pref === 'system') {
-      theme.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-      themePreference.value = 'system'
+  async function toggle(e: MouseEvent, withTransition = false) {
+    // 切换主题偏好、计算最终主题值
+    const currentPref = themePreference.value
+    const currentTheme = theme.value
+    if (currentPref === 'system') {
+        setThemePreference('light')
+        // show('切换为 亮色 模式')
+    } else if (currentPref === 'light') {
+        setThemePreference('dark')
+        // show('切换为 暗色 模式')
+    } else if (currentPref === 'dark') {
+        setThemePreference('system')
+        // show('切换为 跟随系统 模式')
+    }
+    const finalTheme = themePreference.value === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : themePreference.value
+    
+    // 应用主题
+    if (withTransition && enableTransitions() && currentTheme !== finalTheme) {
+      // 带动画过渡 且 浏览器支持 View Transitions API 且 主题有变化
+      const x = e.clientX
+      const y = e.clientY
+
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${Math.hypot(
+          Math.max(x, innerWidth - x),
+          Math.max(y, innerHeight - y)
+        )}px at ${x}px ${y}px)`
+      ]
+
+      await document.startViewTransition(async () => {
+        setTheme(finalTheme)
+        await nextTick()
+      }).ready
+
+      document.documentElement.animate(
+        { clipPath: finalTheme === 'dark' ? clipPath.reverse() : clipPath },
+        {
+          duration: 300,
+          easing: 'ease-in',
+          fill: 'forwards',
+          pseudoElement: `::view-transition-${finalTheme === 'dark' ? 'old' : 'new'}(root)`
+        }
+      )
     } else {
-      theme.value = pref
-      themePreference.value = pref
+      // 无需动画过渡
+      setTheme(finalTheme)
     }
   }
 
   function setTheme(t: 'dark' | 'light') {
     theme.value = t
+  }
+
+  function setThemePreference(t: 'dark' | 'light' | 'system') {
+    themePreference.value = t
   }
 
   return { theme, themePreference, toggle, setTheme }

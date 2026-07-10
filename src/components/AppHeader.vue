@@ -4,7 +4,7 @@
             class="absolute top-[5%] right-[5%] rounded-full outline-outline p-2 inline-flex cursor-pointer
                    hover:outline"
             title="切换明暗模式"
-            @click="toggleTheme(themePreference)"
+            @click="toggle($event, true)"
         >
             <!-- 当前为暗色模式时显示太阳图标（点击切换亮色） -->
             <span v-if="themePreference === 'light'" class="icon-[mynaui--sun] text-amber-500"></span>
@@ -18,22 +18,5 @@
 <script setup lang="ts">
 import { useTheme } from '@/composables/useTheme'
 const { themePreference, toggle } = useTheme()
-import { useToast } from '@/composables/useToast'
-const { show } = useToast()
-
-const toggleTheme = (pref: 'dark' | 'light' | 'system') => {
-    if (pref === 'system') {
-        toggle('light')
-        // show('切换为 亮色 模式')
-    } else if (pref === 'light') {
-        toggle('dark')
-        // show('切换为 暗色 模式')
-    } else if (pref === 'dark') {
-        toggle('system')
-        // show('切换为 跟随系统 模式')
-    }
-}
 
 </script>
-<style scoped>
-</style>

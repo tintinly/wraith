@@ -85,3 +85,21 @@ a[data-title]:hover::after {
   border-radius: 5px;
   font-size: var(--text-xs);
 }
+
+/* ========== 明暗切换 View Transitions 动画 ========== */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* 默认：旧层在下，新层在上 */
+::view-transition-old(root),
+.darkTheme::view-transition-new(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root),
+.darkTheme::view-transition-old(root) {
+  z-index: 9999;
+}
