@@ -6,42 +6,25 @@
     <h1 class="mt-5 text-xl font-bold">Tintinly</h1>
     <h1 class="mt-5 text-xl text-foreground-secondary">A full-time backend developer</h1>
     <nav class="mt-5 flex items-center justify-center gap-2">
-      <a href="https://tintinly.top" 
-      class="group px-3 py-2 rounded-full bg-background text-foreground-secondary border border-border inline-flex hover:text-foreground hover:border-border-secondary hover:-translate-y-1 active:bg-background-secondary transition-all duration-300">
-        <span class="icon-[fa7-solid--home]"></span>
-        <span class="ml-1">Portal</span>
-      </a>
-      <a href="https://blog.tintinly.top" target="_blank" rel="noopener noreferrer" 
-      class="group px-3 py-2 rounded-full bg-background text-foreground-secondary border border-border inline-flex hover:text-foreground hover:border-border-secondary hover:-translate-y-0.5 active:bg-background-secondary transition-all duration-300">
-        <span class="icon-[fa7-solid--blog]"></span>
-        <span class="ml-1" >Blog</span>
-      </a>
-      <a href="https://notes.tintinly.top" target="_blank" rel="noopener noreferrer" 
-      class="group px-3 py-2 rounded-full bg-background text-foreground-secondary border border-border inline-flex hover:text-foreground hover:border-border-secondary hover:-translate-y-0.5 active:bg-background-secondary transition-all duration-300">
-        <span class="icon-[fa7-solid--book]"></span>
-        <span class="ml-1">Notes</span>
+      <a v-for="item in navs" :key="item.name"
+        :href="item.href"
+        :target="item.external ? '_blank' : undefined"
+        :rel="item.external ? 'noopener noreferrer' : undefined"
+        :class="['group px-3 py-2 rounded-full bg-background text-foreground-secondary border border-border inline-flex hover:text-foreground hover:border-border-secondary active:bg-background-secondary transition-all duration-300', item.translate]"
+      >
+        <span :class="item.icon"></span>
+        <span class="ml-1">{{ item.name }}</span>
       </a>
     </nav>
     <nav class="mt-5 flex items-center justify-center gap-4">
-      <a href="https://github.com/tintinly" target="_blank" rel="noopener noreferrer" data-title="GitHub" 
-      class="group rounded-full text-foreground-secondary inline-flex hover:text-foreground">
-        <span class="icon-[fa7-brands--github] group-hover:scale-110 hover:-translate-y-1 active:text-foreground transition-all duration-300"></span>
-      </a>
-      <a href="https://space.bilibili.com/406137704" target="_blank" rel="noopener noreferrer" data-title="Bilibili"
-      class="group rounded-full text-foreground-secondary inline-flex hover:text-[#FB7299] ">
-        <span class="icon-[fa7-brands--bilibili] group-hover:scale-110 hover:-translate-y-0.5 active:text-[#FB7299] transition-all duration-300"></span>
-      </a>
-      <a href="https://twitter.com/TintinMrLiu" target="_blank" rel="noopener noreferrer" data-title="Twitter"
-      class="group rounded-full text-foreground-secondary inline-flex hover:text-foreground">
-        <span class="icon-[fa7-brands--x-twitter] group-hover:scale-110 hover:-translate-y-1 active:text-foreground transition-all duration-300"></span>
-      </a>
-      <a href="https://www.youtube.com/@丁丁-i2b" target="_blank" rel="noopener noreferrer" data-title="YouTube"
-      class="group rounded-full text-foreground-secondary inline-flex hover:text-[#FF0033] ">
-        <span class="icon-[fa7-brands--youtube] group-hover:scale-110 hover:-translate-y-1 active:text-[#FF0033] transition-all duration-300"></span>
-      </a>
-      <a href="mailto:821294434@qq.com" target="_blank" rel="noopener noreferrer" data-title="Email"
-      class="group rounded-full text-foreground-secondary inline-flex hover:text-[#2caafc] ">
-        <span class="icon-[fa7-solid--envelope] group-hover:scale-110 hover:-translate-y-1 active:text-[#2caafc] transition-all duration-300"></span>
+      <a v-for="item in socials" :key="item.title"
+        :href="item.href"
+        target="_blank"
+        rel="noopener noreferrer"
+        :data-title="item.title"
+        :class="['group rounded-full text-foreground-secondary inline-flex', item.hoverClass]"
+      >
+        <span :class="[item.icon, 'group-hover:scale-110', item.translateClass, item.activeClass, 'transition-all duration-300']"></span>
       </a>
     </nav>
     <div v-if="!isOpen">
@@ -54,6 +37,8 @@
 <script setup lang="ts">
 import { useDrawer } from '@/composables/useDrawer'
 import { useDevice } from '@/composables/useDevice'
+import { navs } from '@/data/navs'
+import { socials } from '@/data/socials'
 
 const { isOpen } = useDrawer()
 const { isMobile } = useDevice()
