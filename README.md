@@ -2,7 +2,7 @@
 
 个人门户主页，汇聚导航、项目、技能栈等信息的入口站点。
 
-在线访问：[tintinly.top](https://tintinly.top)
+示例访问：[tintinly.top](https://tintinly.top)
 
 ## 技术栈
 
@@ -59,5 +59,3 @@ src/
 ## 部署
 
 项目输出为纯静态 SPA，构建产物在 `dist/` 目录，可直接部署到任意静态托管服务（Nginx、GitHub Pages、Cloudflare Pages 等）。
-
-> 由于使用 `createWebHistory()` 路由模式，部署时需配置服务端 fallback，将所有路径指向 `index.html`。
