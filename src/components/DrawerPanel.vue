@@ -44,7 +44,7 @@
           </div>
 
           <button v-if="!isMobile" 
-            class="inline-flex cursor-pointer rounded-full p-1.5 text-foreground-secondary transition-colors duration-200 hover:bg-background-secondary hover:text-foreground active:bg-background-secondary active:text-foreground"
+            class="inline-flex cursor-pointer rounded-full p-1.5 text-foreground-secondary transition-colors duration-200 hover:bg-background-secondary hover:text-foreground active:bg-background-secondary active:text-foreground active:transition-none"
             title="关闭"
             @click="close"
           >

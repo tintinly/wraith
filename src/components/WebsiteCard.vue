@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a :href="websiteLink" target="_blank" class="group h-full p-8 flex items-center justify-between gap-8 border border-border/50 rounded-xl bg-surface/50 hover:border-border-secondary hover:shadow-lg hover:shadow-border/30 active:border-border-secondary active:shadow-2xl active:shadow-border transition-all duration-300">
+        <a :href="websiteLink" target="_blank" class="group h-full p-8 flex items-center justify-between gap-8 border border-border/50 rounded-xl bg-surface/50 hover:border-border-secondary hover:shadow-lg hover:shadow-border/30 active:border-border-secondary active:shadow-2xl active:shadow-border active:transition-none transition-all duration-300">
             <span :class="websiteIcon" class="text-3xl"></span>
             <div class="flex-1 flex flex-col gap-1 items-start">
                 <div>

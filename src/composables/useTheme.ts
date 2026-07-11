@@ -1,6 +1,4 @@
-import { computed, nextTick, ref, watchEffect } from 'vue'
-import { useToast } from '@/composables/useToast'
-const { show } = useToast()
+import { nextTick, ref, watchEffect } from 'vue'
 const THEME_PREFERENCE_KEY = 'theme-preference'
 
 // 从 localStorage 读取偏好，若无则跟随系统

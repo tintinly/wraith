@@ -119,4 +119,28 @@ export const skills: Skill[] = [
     darkIcon: 'icon-[skill-icons--idea-dark]',
     skillLink: 'https://www.jetbrains.com/idea/',
   },
+  {
+    skillName: 'markdown',
+    lightIcon: 'icon-[skill-icons--markdown-light]',
+    darkIcon: 'icon-[skill-icons--markdown-dark]',
+    skillLink: 'https://www.markdownguide.org/',
+  },
+  {
+    skillName: 'github actions',
+    lightIcon: 'icon-[skill-icons--githubactions-light]',
+    darkIcon: 'icon-[skill-icons--githubactions-dark]',
+    skillLink: 'https://github.com/actions',
+  },
+  {
+    skillName: 'vite',
+    lightIcon: 'icon-[skill-icons--vite-light]',
+    darkIcon: 'icon-[skill-icons--vite-dark]',
+    skillLink: 'https://vitejs.dev/',
+  },
+  {
+    skillName: 'npm',
+    lightIcon: 'icon-[skill-icons--npm-light]',
+    darkIcon: 'icon-[skill-icons--npm-dark]',
+    skillLink: 'https://www.npmjs.com/',
+  },
 ]

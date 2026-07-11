@@ -10,7 +10,7 @@
         :href="item.href"
         :target="item.external ? '_blank' : undefined"
         :rel="item.external ? 'noopener noreferrer' : undefined"
-        class="group px-3 py-2 rounded-full bg-background text-foreground-secondary border border-border inline-flex hover:text-foreground hover:border-border-secondary hover:-translate-y-1 active:bg-background-secondary transition-all duration-300"
+        class="group px-3 py-2 rounded-full bg-background text-foreground-secondary border border-border inline-flex hover:text-foreground hover:border-border-secondary hover:-translate-y-1 active:bg-background-secondary active:transition-none transition-all duration-300"
       >
         <span :class="item.icon"></span>
         <span class="ml-1">{{ item.name }}</span>
@@ -26,7 +26,7 @@
         :style="item.color ? { '--social-color': item.color } : {'--social-color': 'var(--color-foreground)'}"
         class="group rounded-full text-foreground-secondary inline-flex"
       >
-        <span :class="item.icon" class="group-hover:text-(--social-color) group-active:text-(--social-color) group-hover:scale-110 hover:-translate-y-1 transition-all duration-300"></span>
+        <span :class="item.icon" class="group-hover:text-(--social-color) group-active:text-(--social-color) group-active:transition-none group-hover:scale-110 hover:-translate-y-1 transition-all duration-300"></span>
       </a>
     </nav>
     <div v-if="!isOpen">

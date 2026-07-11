@@ -7,33 +7,21 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    projectName: 'Project1',
-    projectDescription: 'Some description.',
-    projectLink: 'https://www.project.com',
+    projectName: 'Wraith',
+    projectDescription: 'A personal website with concise style | 一个风格简洁的个人网站',
+    projectLink: 'https://github.com/tintinly/wraith',
     projectIcon: 'icon-[twemoji--open-file-folder]',
   },
   {
-    projectName: 'Project2',
-    projectDescription: 'Some description Some description Some description Some description.',
-    projectLink: 'https://www.project2.com',
-    projectIcon: 'icon-[twemoji--open-file-folder]',
+    projectName: 'Detection Applet',
+    projectDescription: 'UniApp based detection entrusting applet | 基于 uni-app 的检测委托小程序',
+    projectLink: 'https://github.com/tintinly/qhjcminiapp',
+    projectIcon: 'icon-[twemoji--test-tube]',
   },
   {
-    projectName: 'Project3',
-    projectDescription: 'Some description Some description Some description Some description Some description Some description Some description Some description.',
-    projectLink: 'https://www.project3.com',
-    projectIcon: 'icon-[twemoji--open-file-folder]',
-  },
-  {
-    projectName: 'Project4',
-    projectDescription: 'Some description.',
-    projectLink: 'https://www.project4.com',
-    projectIcon: 'icon-[twemoji--open-file-folder]',
-  },
-  {
-    projectName: 'Project5',
-    projectDescription: 'Some description.',
-    projectLink: 'https://www.project5.com',
-    projectIcon: 'icon-[twemoji--open-file-folder]',
+    projectName: 'Wattson',
+    projectDescription: 'A blog template based on Nuxt | 基于 NuxtJS 的博客模板',
+    projectLink: 'https://github.com/tintinly/wattson',
+    projectIcon: 'icon-[twemoji--speech-balloon]',
   },
 ]
