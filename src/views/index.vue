@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center pb-30">
     <div class="border-3 border-border-secondary rounded-full overflow-hidden">
-      <img src="@/assets/avatar2.png" alt="avatar" class="w-26 h-26 rounded-full scale-130">
+      <img src="@/assets/avatar.webp" alt="avatar" class="w-26 h-26 rounded-full scale-130">
     </div>
     <h1 class="mt-5 text-xl font-bold">Tintinly</h1>
     <h1 class="mt-5 text-xl text-foreground-secondary">A full-time backend developer</h1>
